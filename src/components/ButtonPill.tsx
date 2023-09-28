@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 export const ButtonPillStyles = css`
@@ -14,7 +15,11 @@ const StyledButtonPill = styled.div`
   ${ButtonPillStyles}
 `;
 
-const ButtonPill = ({ children }) => {
+interface ButtonPillProps {
+  children: ReactNode;
+}
+
+const ButtonPill: React.FC<ButtonPillProps> = ({ children }) => {
   return (
     <StyledButtonPill className='rounded-circle bg-danger d-flex justify-content-center align-items-center'>
       {children}
