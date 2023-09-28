@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
+import { ReactNode } from 'react';
 
 const CustomStyledButton = styled(Button)`
   width: 3rem;
@@ -7,7 +8,11 @@ const CustomStyledButton = styled(Button)`
   position: relative;
 `;
 
-const StyledButton = ({ children }) => {
+interface StyledButtonProps {
+  children: ReactNode;
+}
+
+const StyledButton: React.FC<StyledButtonProps> = ({ children }) => {
   return (
     <CustomStyledButton variant='outline-primary' className='rounded-circle'>
       {children}
