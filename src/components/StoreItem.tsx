@@ -1,6 +1,7 @@
 import { Button, Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import { formatCurrency } from '../utilities/formatCurrency';
+import { useShoppingCart } from '../context/ShoppingCartContext';
 
 type StoreItemProps = {
   id: number;
@@ -19,9 +20,9 @@ const StyledDiv = styled.div`
 `;
 
 const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
-  /* quatity testing placeholder */
-  const quantity = 1;
-  /*  */
+  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
+    useShoppingCart();
+  const quantity = getItemQuantity(id);
   return (
     <Card className='h-100'>
       <CardImg variant='top' src={imgUrl} />
@@ -32,17 +33,19 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
         </Card.Title>
         <div className='mt-auto'>
           {quantity === 0 ? (
-            <Button className='w-100'>+ Add To Cart</Button>
+            <Button onClick={() => increaseCartQuantity(id)} className='w-100'>
+              + Add To Cart
+            </Button>
           ) : (
             <StyledDiv className='d-flex align-items-center flex-column'>
               <StyledDiv className='d-flex align-items-center justify-content-center'>
-                <Button>-</Button>
+                <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
                 <div>
                   <span className='fs-3'>{quantity}</span> in cart
                 </div>
-                <Button>+</Button>
+                <Button onClick={() => increaseCartQuantity(id)}>+</Button>
               </StyledDiv>
-              <Button variant='danger' size='sm'>
+              <Button onClick={() => removeFromCart(id)} variant='danger' size='sm'>
                 Remove
               </Button>
             </StyledDiv>
