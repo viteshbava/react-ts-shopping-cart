@@ -12,11 +12,12 @@ const CustomStyledButton = styled(Button).attrs<ButtonProps>(() => ({
 `;
 
 interface StyledButtonProps {
+  onClick: () => void;
   children: ReactNode;
 }
 
-const StyledButton: React.FC<StyledButtonProps> = ({ children }) => {
-  return <CustomStyledButton>{children}</CustomStyledButton>;
+const StyledButton: React.FC<StyledButtonProps> = ({ onClick, children }) => {
+  return <CustomStyledButton onClick={onClick}>{children}</CustomStyledButton>;
 };
 
 export default StyledButton;
